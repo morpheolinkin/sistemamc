@@ -1,5 +1,6 @@
 package com.jefferson.sistemamc.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,7 +25,9 @@ public class Categoria {
     private Integer id;
     private String nome;
 
+    @JsonManagedReference
     @ManyToMany(mappedBy = "categorias")
+    @ToString.Exclude
     private List<Produto> produtos = new ArrayList<>();
 
     public Categoria(Integer id, String nome) {

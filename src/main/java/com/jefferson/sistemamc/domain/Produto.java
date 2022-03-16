@@ -1,5 +1,6 @@
 package com.jefferson.sistemamc.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,11 +21,13 @@ public class Produto {
     private String nome;
     private Double preco;
 
+    @JsonBackReference
     @ManyToMany
     @JoinTable(name = "PRODUTO_CATEGORIA",
             joinColumns = @JoinColumn(name = "produto_id"),
             inverseJoinColumns = @JoinColumn(name = "categoria_id")
     )
+    @ToString.Exclude
     private List<Categoria> categorias = new ArrayList<>();
 
     //Constructor
