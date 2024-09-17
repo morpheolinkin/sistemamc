@@ -1,11 +1,13 @@
 package com.jefferson.sistemamc.domain;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,7 +17,8 @@ import java.util.Objects;
 @ToString
 @NoArgsConstructor
 @Entity
-public class Estado {
+public class Estado implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id

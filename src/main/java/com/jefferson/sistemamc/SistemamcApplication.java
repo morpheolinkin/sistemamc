@@ -8,7 +8,7 @@ import com.jefferson.sistemamc.repositories.CategoriaRepository;
 import com.jefferson.sistemamc.repositories.CidadeRepository;
 import com.jefferson.sistemamc.repositories.EstadoRepository;
 import com.jefferson.sistemamc.repositories.ProdutoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,15 +17,13 @@ import java.util.Arrays;
 import java.util.List;
 
 @SpringBootApplication
+@RequiredArgsConstructor
 public class SistemamcApplication implements CommandLineRunner {
-    @Autowired
-    private CategoriaRepository categoriaRepository;
-    @Autowired
-    private ProdutoRepository produtoRepository;
-    @Autowired
-    private EstadoRepository estadoRepository;
-    @Autowired
-    private CidadeRepository cidadeRepository;
+
+    private final CategoriaRepository categoriaRepository;
+    private final ProdutoRepository produtoRepository;
+    private final EstadoRepository estadoRepository;
+    private final CidadeRepository cidadeRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(SistemamcApplication.class, args);
@@ -42,11 +40,11 @@ public class SistemamcApplication implements CommandLineRunner {
         Produto p3 = new Produto(null, "Mouse", 80.00);
 
         cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
-        cat2.getProdutos().addAll(List.of(p2));
+        cat2.getProdutos().add(p2);
 
-        p1.getCategorias().addAll(List.of(cat1));
+        p1.getCategorias().add(cat1);
         p2.getCategorias().addAll(Arrays.asList(cat1, cat2));
-        p3.getCategorias().addAll(List.of(cat1));
+        p3.getCategorias().add(cat1);
 
         categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
         produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
@@ -58,14 +56,10 @@ public class SistemamcApplication implements CommandLineRunner {
         Cidade c2 = new Cidade(null, "São Paulo", est2);
         Cidade c3 = new Cidade(null, "Campinas", est2);
 
-        est1.getCidades().addAll(List.of(c1));
+        est1.getCidades().add(c1);
         est2.getCidades().addAll(List.of(c2, c3));
 
         estadoRepository.saveAll(Arrays.asList(est1, est2));
         cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
-
-
-
-
     }
 }

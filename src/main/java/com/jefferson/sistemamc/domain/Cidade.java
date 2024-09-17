@@ -1,19 +1,21 @@
 package com.jefferson.sistemamc.domain;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
-import java.util.Objects;
+import java.io.Serial;
+import java.io.Serializable;
 
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @Entity
-public class Cidade {
+public class Cidade implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -29,18 +31,5 @@ public class Cidade {
         this.id = id;
         this.nome = nome;
         this.estado = estado;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Cidade cidade = (Cidade) o;
-        return Objects.equals(id, cidade.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 }

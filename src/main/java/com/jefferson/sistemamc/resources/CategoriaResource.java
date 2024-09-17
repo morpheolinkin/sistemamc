@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/categorias")
@@ -19,7 +21,11 @@ public class CategoriaResource {
     @GetMapping(value = "{id}")
     public ResponseEntity<Categoria> listar(@PathVariable("id") Integer id) {
         Categoria obj = service.findById(id);
-
         return ResponseEntity.ok().body(obj);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Categoria>> listAll() {
+        return ResponseEntity.ok().body(service.listAll());
     }
 }

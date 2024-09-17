@@ -1,13 +1,14 @@
 package com.jefferson.sistemamc.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.Hibernate;
 
-import javax.persistence.*;
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -17,7 +18,8 @@ import java.util.Objects;
 @ToString
 @NoArgsConstructor
 @Entity
-public class Categoria {
+public class Categoria implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -38,13 +40,13 @@ public class Categoria {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Categoria categoria = (Categoria) o;
-        return id != null && Objects.equals(id, categoria.id);
+        return Objects.equals(getId(), categoria.getId());
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hashCode(getId());
     }
 }

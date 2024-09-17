@@ -6,6 +6,7 @@ import com.jefferson.sistemamc.services.exceptions.ObjectNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -18,5 +19,9 @@ public class CategoriaService {
         Optional<Categoria> byId = categoriaRepository.findById(id);
         return byId.orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
+    }
+
+    public List<Categoria> listAll() {
+        return categoriaRepository.findAll();
     }
 }

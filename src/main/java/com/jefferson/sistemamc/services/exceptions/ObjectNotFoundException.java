@@ -1,7 +1,12 @@
 package com.jefferson.sistemamc.services.exceptions;
 
-public class ObjectNotFoundException extends RuntimeException {
+import java.io.Serial;
+import java.io.Serializable;
 
+public class ObjectNotFoundException
+        extends RuntimeException
+        implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     public ObjectNotFoundException(String msg) {
